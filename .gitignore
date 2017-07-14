@@ -1,3 +1,10 @@
+# Executables
+unwind-local
+unwind-pid
+test-bsearch
+test-sleep
+test-strlen
+
 # Prerequisites
 *.d
 
