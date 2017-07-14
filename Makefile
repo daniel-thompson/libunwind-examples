@@ -8,6 +8,7 @@ APPS = unwind-pid unwind-local $(TESTS)
 TESTS = test-bsearch test-cxx test-sleep test-strlen
 
 all : $(APPS)
+tests : $(TESTS)
 
 strip :
 	$(STRIP) $(APPS)
