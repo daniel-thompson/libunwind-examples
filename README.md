@@ -33,6 +33,21 @@ stack includes a C library function before we reach main.
     sh$ kill %1
     [1]+  Terminated              ./test-bsearch
     
+`test-cxx` is quick test that shows backtracing out of C++ code. There
+is no dynamic link coverage in this test (all library code used is
+template instantiated).
+
+    linaro-alip$ ./test-cxx & p=$!; sleep 0.1; ./unwind-pid $p; kill $p
+    [1] 26683
+    0xaaaab96b6a3c:
+    (_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEclEv+0xec)
+0xaaaab96b6aa8:
+    (_ZNSt24uniform_int_distributionIiEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEiRT_RKNS0_10param_typeE+0x50)
+    0xaaaab96b6804: (main+0x28)
+    0xffffadeb5364: (__libc_start_main+0xdc)
+    0xffffadeb5364: (__libc_start_main+0xdc)
+    [1]+  Terminated              ./test-cxx
+    
 `test-sleep` has a stack that originates in the C library code to make
 a system call.
     
@@ -59,4 +74,3 @@ a system call.
     sh$ kill %1
     sh$ 
     [1]+  Terminated              ./test-strlen
-

@@ -2,6 +2,7 @@
 unwind-local
 unwind-pid
 test-bsearch
+test-cxx
 test-sleep
 test-strlen
 
