@@ -16,6 +16,8 @@ int main(int argc, char **argv)
 	pid_t pid = atoi(argv[1]);
 	if (ptrace(PTRACE_ATTACH, pid, 0, 0) != 0)
 		die("ERROR: cannot attach to %d\n", pid);
+	int status;
+	assert(waitpid(pid, &status, 0) == 0);
 
 	void *context = _UPT_create(pid);
 	unw_cursor_t cursor;
